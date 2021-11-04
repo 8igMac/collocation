@@ -31,7 +31,7 @@ def get_test_data():
     test_data.append(('疫情', '升溫', 1))
     test_data.append(('大規模', '爆發', 1))
     test_data.append(('肺炎', '確診', 1))
-    test_data.append(('社交距離', '維持', 1))
+    test_data.append(('社交', '維持', 1))
 
     # False collocation.
     test_data.append(('國家', '長期', 0))
