@@ -1,6 +1,15 @@
 # Collocation
 Finding collocations from a Chinese news corpus.
 
+## Setup
+```sh
+$ git clone https://github.com/8igMac/collocation.git
+$ cd collocation
+$ python -m venv venv
+$ source venv/bin/activate
+$ python -m pip install -r requirements.txt
+```
+
 ## Data
 1. Put data in the `data/` directory. Example data format 
 (`data/news.json`)
