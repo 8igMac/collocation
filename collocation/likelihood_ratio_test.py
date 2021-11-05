@@ -37,10 +37,14 @@ def likelihood_ratio_test(target, candidate, sents):
     # H2: w1 and w2 are dependent.
     # 
     # log(L(H1) / L(H2))
-    llr = math.log10(binom.pmf(o11, o11+o12, (o11+o21)/total)) +\
-        math.log10(binom.pmf(o21, o21+o22, (o11+o21)/total)) -\
-        math.log10(binom.pmf(o11, o11+o12, o11/(o11+o12))) -\
-        math.log10(binom.pmf(o21, o21+o22, o21/(o21+o22)))
+    lh1 = binom.pmf(o11, o11+o12, (o11+o21)/total) *\
+        binom.pmf(o21, o21+o22, (o11+o21)/total) 
+    lh2 = binom.pmf(o11, o11+o12, o11/(o11+o12)) *\
+        binom.pmf(o21, o21+o22, o21/(o21+o22))
+    if lh1 == 0:
+        return False
+    else:
+        llr = math.log10(lh1 / lh2)
 
     # -2 * Log likelihood ratio is asymtotically chi-square distributed.
     return -2 * llr > threshold
