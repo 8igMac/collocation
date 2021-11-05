@@ -16,7 +16,8 @@ def _seg_list(words, sep):
 
 def get_sents():
     sents = list()
-    with open(f'{data_dir}/news10000.json') as f:
+    # with open(f'{data_dir}/news10000.json') as f:
+    with open(f'{data_dir}/hanlp_seg.json') as f:
         for line in f:
             news = json.loads(line)
             for sent in _seg_list(news['hanlp_seg'], '，。！？'):
@@ -32,11 +33,25 @@ def get_test_data():
     test_data.append(('大規模', '爆發', 1))
     test_data.append(('肺炎', '確診', 1))
     test_data.append(('社交', '維持', 1))
+    test_data.append(('疫苗', '提供', 1))
+    test_data.append(('疫苗', '接種', 1))
+    test_data.append(('疫苗', '劑', 1))
+    test_data.append(('臨床', '試驗', 1))
+    test_data.append(('臉書', '發文', 1))
+    test_data.append(('產業', '推動', 1))
+    test_data.append(('關注', '焦點', 1))
 
     # False collocation.
     test_data.append(('國家', '長期', 0))
     test_data.append(('民主', '政治', 0))
     test_data.append(('家鄉', '疫情', 0))
+    test_data.append(('市長', '表示', 0))
+    test_data.append(('主席', '選舉', 0))
+    test_data.append(('防疫', '事務', 0))
+    test_data.append(('疫苗', '檢討', 0))
+    test_data.append(('昨晚', '發文', 0))
+    test_data.append(('媒體', '網路', 0))
+    test_data.append(('授權', '程序', 0))
 
     return test_data
 
@@ -52,11 +67,13 @@ def evalutate(method, test_data, sents):
             if is_collocation == 1:
                 true_positive += 1
             else:
+                print(f'false_positive: {word1}, {word2}')
                 false_positive += 1
         else:
             if is_collocation == 1:
                 true_negative += 1
             else:
+                print(f'false_negative: {word1}, {word2}')
                 false_negative += 1
 
     # Evaluate result.
